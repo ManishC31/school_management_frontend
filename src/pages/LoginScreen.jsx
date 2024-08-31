@@ -49,7 +49,7 @@ const LoginScreen = () => {
                     <input
                       type="radio"
                       name="role"
-                      className="radio checked:bg-blue-600"
+                      className="radio checked:bg-accent"
                       value="student"
                       checked={userData.role === "student"}
                       onChange={(e) => {
@@ -62,7 +62,7 @@ const LoginScreen = () => {
                     <input
                       type="radio"
                       name="role"
-                      className="radio checked:bg-blue-600"
+                      className="radio checked:bg-accent"
                       value="teacher"
                       checked={userData.role === "teacher"}
                       onChange={(e) => {
@@ -126,7 +126,7 @@ const LoginScreen = () => {
               </div>
             </div>
             <div className="card-actions justify-end mt-5">
-              <button className="btn btn-primary btn-wide">Proceed</button>
+              <button className="btn btn-accent btn-wide">Proceed</button>
             </div>
           </form>
           {errorMessage !== "" ? (
