@@ -1,46 +1,39 @@
-// import React from "react";
-// import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import LoginScreen from "./pages/LoginScreen";
-// import StudentDashboard from "./pages/StudentDashboard";
-// import TeacherDashboard from "./pages/TeacherDashboard";
-// import { AuthProvider } from "./store/AuthContext";
-// import Layout from "./pages/Layout";
-
-// const App = () => {
-//   return (
-//     <BrowserRouter basename="/">
-//       <AuthProvider>
-//         <Routes>
-//           <Route path="/" element={<LoginScreen />} />
-//           <Route path="/teacher" element={<TeacherDashboard />} />
-//           <Route path="/student" element={<StudentDashboard />} />
-//         </Routes>
-//       </AuthProvider>
-//     </BrowserRouter>
-//   );
-// };
-
-// export default App;
-
 // src/App.jsx
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Layout from "./pages/Layout";
-import LoginScreen from "./pages/LoginScreen";
-import StudentDashboard from "./pages/student/StudentDashboard";
-import TeacherDashboard from "./pages/teacher/TeacherDashboard";
+import Student from "./pages/student/StudentDashboard";
+import Teacher from "./pages/teacher/TeacherDashboard";
+import Login from "./pages/LoginScreen";
 
 function App() {
   return (
     <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<LoginScreen />} />{" "}
-          <Route path="/teacher" element={<TeacherDashboard />} />
-          <Route path="/student" element={<StudentDashboard />} />
-          {/* Add more routes as needed */}
-        </Routes>
-      </Layout>
+      <Routes>
+        {/* Routes without Layout */}
+        <Route path="/login" element={<Login />} />
+
+        {/* Routes with Layout */}
+        <Route
+          path="/student"
+          element={
+            <Layout>
+              <Student />
+            </Layout>
+          }
+        />
+        <Route
+          path="/teacher"
+          element={
+            <Layout>
+              <Teacher />
+            </Layout>
+          }
+        />
+
+        {/* Redirect to login or home if no route matches */}
+        <Route path="*" element={<Login />} />
+      </Routes>
     </Router>
   );
 }

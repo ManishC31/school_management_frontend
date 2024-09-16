@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { loginCall } from "../services/auth";
 import { useNavigate } from "react-router-dom";
+import backgroundImage from "../assets/images/login_background.jpg";
+import { useAuth } from "../store/AuthContext";
 
 const LoginScreen = () => {
+  const { user, login, logout, isAuthenticated } = useAuth();
+
+  console.log("user", user);
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     email: "",
@@ -19,6 +24,7 @@ const LoginScreen = () => {
 
       if (response.success) {
         setTimeout(() => {
+          login;
           if (response.role === "student") {
             navigate("/student");
           } else if (response.role === "teacher") {
@@ -34,10 +40,10 @@ const LoginScreen = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="card bg-base-100 w-100 shadow-xl">
+    <div className="flex items-center justify-center min-h-screen bg-base-300">
+      <div className="card bg-base-100 w-full max-w-md p-2 shadow-xl">
         <div className="card-body">
-          <h2 className="card-title mx-auto">Sign in to your account</h2>
+          <h2 className="card-title mx-auto">SIGN IN</h2>
           <p className="mx-auto">
             If a dog chews shoes whose shoes does he choose?
           </p>
@@ -49,7 +55,7 @@ const LoginScreen = () => {
                     <input
                       type="radio"
                       name="role"
-                      className="radio checked:bg-accent"
+                      className="radio checked:bg-primary"
                       value="student"
                       checked={userData.role === "student"}
                       onChange={(e) => {
@@ -62,7 +68,7 @@ const LoginScreen = () => {
                     <input
                       type="radio"
                       name="role"
-                      className="radio checked:bg-accent"
+                      className="radio checked:bg-primary"
                       value="teacher"
                       checked={userData.role === "teacher"}
                       onChange={(e) => {
@@ -126,14 +132,11 @@ const LoginScreen = () => {
               </div>
             </div>
             <div className="card-actions justify-end mt-5">
-              <button className="btn btn-accent btn-wide">Proceed</button>
+              <button className="btn btn-primary btn-wide">Proceed</button>
             </div>
           </form>
           {errorMessage !== "" ? (
-            <div
-              role="alert"
-              className="alert alert-error mt-4 p-2 bg-red-50 border-red-600 text-red-700"
-            >
+            <div role="alert" className="alert alert-error mt-4 p-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6 shrink-0 stroke-current hidden sm:block"
@@ -147,7 +150,7 @@ const LoginScreen = () => {
                   d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <span className="">{errorMessage}</span>
+              <span>{errorMessage}</span>
             </div>
           ) : null}
         </div>

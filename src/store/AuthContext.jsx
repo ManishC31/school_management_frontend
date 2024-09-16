@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
     // Add your authentication logic here
     setUser(userData);
     if (userData.role === "student") {
-      navigate("/student");
+      navigate("/student/");
     } else if (userData.role === "teacher") {
       navigate("/teacher");
     } else {
